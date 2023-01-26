@@ -1,3 +1,8 @@
+<% if cart_subtotal_cents == 0 %>
+<p>There's nothing in your cart right now...</p>
+<a href="/"><p>Click here to go back home</p></a>
+<% else %>
+    
 <section class="cart-show">
 
   <header class="page-header">
@@ -50,3 +55,4 @@
   </div>
 
 </section>
+<% end %>
