@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   helper_method :cart_subtotal_cents
 
   def order_items
-    @order_items ||= Product.select("products.id, products.image, products.name, products.description, line_items.quantity, products.price_cents").joins("INNER JOIN line_items ON line_items.product_id = products.id").where("line_items.order_id = #{@order.id}").map {|product| { product:product } }
+    @order_items ||= Product.select("products.id, products.image, products.name, products.description, line_items.quantity, products.price_cents, orders.email").joins("INNER JOIN line_items ON line_items.product_id = products.id").joins("INNER JOIN orders ON order_id = orders.id").where("line_items.order_id = #{@order.id}").map {|product| { product:product } }
   end
   helper_method :order_items
   
@@ -30,6 +30,11 @@ class ApplicationController < ActionController::Base
     order_items.map {|entry| entry[:product].price_cents * entry[:product].quantity}.sum
   end
   helper_method :order_subtotal_cents
+
+  def order_email
+    order_items.map {|entry| entry[:product].email }[0]
+  end
+  helper_method :order_email
 
   def update_cart(new_cart)
     cookies[:cart] = {
