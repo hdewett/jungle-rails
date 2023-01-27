@@ -1,5 +1,5 @@
 class Admin::DashboardController < ApplicationController
-  http_basic_authenticate_with name: "dhh", password: "secret", except: :index
+  http_basic_authenticate_with name: ENV['ADMIN_USER'], password: ENV['ADMIN_PASSWORD'], except: :index
 
   def index
     render plain: "Everyone can see me!"
