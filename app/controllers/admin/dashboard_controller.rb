@@ -1,13 +1,15 @@
 class Admin::DashboardController < ApplicationController
   http_basic_authenticate_with name: ENV['ADMIN_USER'], password: ENV['ADMIN_PASSWORD'], except: :index
 
-  def index
-    render plain: "Everyone can see me!"
-  end
+  private
 
-  def edit
-    render plain: "I'm only accessible if you know the password"
+  def product_count
+    @product_count ||= Product.all.count
   end
-# def show
-  # end
+  helper_method :product_count
+
+  def category_count
+    @category_count ||= Category.all.count
+  end
+  helper_method :category_count
 end
