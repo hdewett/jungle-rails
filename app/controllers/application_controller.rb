@@ -43,4 +43,9 @@ class ApplicationController < ActionController::Base
     }
     cookies[:cart]
   end
+  
+  def about_link
+    "/about"
+  end
+  helper_method :about_link
 end
