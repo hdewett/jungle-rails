@@ -19,6 +19,11 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
+  def category_quantity
+    @category_quantity = Category.select("categories.name, SUM(products.quantity)").join("INNERJOIN products ON products.category_id = categories.id").group("categories.name")
+  end
+  helper_method :category_quantity
+
   private
 
   def category_params
