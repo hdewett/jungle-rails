@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
-#####################
-
-#####################
-
   describe 'Validations' do
-    # validation tests/examples here
 
     it 'should save a new product with all fields present' do
       @category = Category.new(name: 'Grass')
@@ -48,10 +43,6 @@ RSpec.describe Product, type: :model do
 
       expect(@product.errors.full_messages).to include("Category can't be blank")
     end
-
-
-
-
 
   end
 end
